@@ -190,7 +190,7 @@ function rksnwp_evernote_replace_note_links( $theNote ){
 	foreach($matches[1] as $match){
 		$counter++;
 		$replacement = '';
-		$guid = str_replace('/"','',$match);
+		$guid = mb_str_replace('/"','',$match);
 		$guid = explode('/', $guid);
 		$guid = array_pop($guid);
 		
@@ -202,7 +202,7 @@ function rksnwp_evernote_replace_note_links( $theNote ){
 		} else {
 			$replacement = '<span class="not-published"><em>Note, ' . $matches[3][$counter] . ' , not yet published.</em></span>';
 		}				
-		$theNote['content'] = str_replace($matches[0][$counter], $replacement, $theNote['content']);	
+		$theNote['content'] = mb_str_replace($matches[0][$counter], $replacement, $theNote['content']);	
 	}
 	
 	return $theNote;
@@ -280,8 +280,8 @@ function rksnwp_en_process_resources ( $theNote ) {
 		unset($matches);
 		$resource_pos = array_search($hash, $theNote['resource_hash']);
 		$theHTML = apply_filters('sentinote_media_url_filter', $theNote['resource_url'][$resource_pos]);
-		$theNote['content'] = str_replace($media_inner,$theHTML,$theNote['content']);
-		$theNote['content'] = str_replace('</en-media>', '', $theNote['content']);
+		$theNote['content'] = mb_str_replace($media_inner,$theHTML,$theNote['content']);
+		$theNote['content'] = mb_str_replace('</en-media>', '', $theNote['content']);
 	}	
 	return $theNote;
 }
@@ -321,7 +321,7 @@ function rksnwp_en_fix_chars ( $theNote ){
 
 	$content = $theNote['content'];
 	$content = rksnwp_convert_smart_quotes($content); 
-	$content = str_replace('&quot;','"',$content);
+	$content = mb_str_replace('&quot;','"',$content);
 	$theNote['content'] = $content;
 	
 	return $theNote;
@@ -330,7 +330,7 @@ add_filter( 'sentinote_process_en_note_data', 'rksnwp_en_fix_chars' );
 
 // 0x0005: Remove and replace special chars and smartquotes
 function rksnwp_en_remove_insertion_point ( $theNote ) {
-	$theNote['content'] = str_replace('<span style="-evernote-last-insertion-point:true;"/>','', $theNote['content']);
+	$theNote['content'] = mb_str_replace('<span style="-evernote-last-insertion-point:true;"/>','', $theNote['content']);
 	return $theNote;
 }
 add_filter( 'sentinote_process_en_note_data', 'rksnwp_en_remove_insertion_point' );
@@ -349,9 +349,9 @@ function rksnwp_en_div_to_p ( $theNote ) {
 
 		$content = $theNote['content'];
 		$content = preg_replace("/\n|\r/", '', $content);
-		$content = str_replace("\n\n",'<div><br/></div>',$content);
-		$content = str_replace('<div', '<p', $content);
-		$content = str_replace('</div>', "</p>\n", $content);
+		$content = mb_str_replace("\n\n",'<div><br/></div>',$content);
+		$content = mb_str_replace('<div', '<p', $content);
+		$content = mb_str_replace('</div>', "</p>\n", $content);
 		$content = preg_replace("/<p><br[^>]*><\/p>/","", $content);
 				
 		$theNote['content'] = $content;

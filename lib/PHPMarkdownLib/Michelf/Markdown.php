@@ -282,7 +282,7 @@ class Markdown implements MarkdownInterface {
 				  )
 				)*',
 				$nested_tags_level);
-		$content2 = str_replace('\2', '\3', $content);
+		$content2 = mb_str_replace('\2', '\3', $content);
 
 		# First, look for nested blocks, e.g.:
 		# 	<div>
@@ -1252,7 +1252,7 @@ class Markdown implements MarkdownInterface {
 	# is *not* suitable for attributes enclosed in single quotes.
 	#
 		$text = $this->encodeAmpsAndAngles($text);
-		$text = str_replace('"', '&quot;', $text);
+		$text = mb_str_replace('"', '&quot;', $text);
 		return $text;
 	}
 	
@@ -1264,7 +1264,7 @@ class Markdown implements MarkdownInterface {
 	# no-entities mode is set.
 	#
 		if ($this->no_entities) {
-			$text = str_replace('&', '&amp;', $text);
+			$text = mb_str_replace('&', '&amp;', $text);
 		} else {
 			# Ampersand-encoding based entirely on Nat Irons's Amputator
 			# MT plugin: <http://bumppo.net/projects/amputator/>
@@ -1272,7 +1272,7 @@ class Markdown implements MarkdownInterface {
 								'&amp;', $text);
 		}
 		# Encode remaining <'s
-		$text = str_replace('<', '&lt;', $text);
+		$text = mb_str_replace('<', '&lt;', $text);
 
 		return $text;
 	}
@@ -1892,7 +1892,7 @@ abstract class _MarkdownExtra_TmpImpl extends \Michelf\Markdown {
 			if ($span) {
 				$void = $this->hashPart("", ':');
 				$newline = "$void\n";
-				$parts[0] = $void . str_replace("\n", $newline, $parts[0]) . $void;
+				$parts[0] = $void . mb_str_replace("\n", $newline, $parts[0]) . $void;
 			}
 			
 			$parsed .= $parts[0]; # Text before current tag.
@@ -2573,7 +2573,7 @@ abstract class _MarkdownExtra_TmpImpl extends \Michelf\Markdown {
 		if (empty($this->table_align_class_tmpl))
 			return " align=\"$alignname\"";
 
-		$classname = str_replace('%%', $alignname, $this->table_align_class_tmpl);
+		$classname = mb_str_replace('%%', $alignname, $this->table_align_class_tmpl);
 		return " class=\"$classname\"";
 	}
 	protected function _doTable_callback($matches) {
@@ -2976,7 +2976,7 @@ abstract class _MarkdownExtra_TmpImpl extends \Michelf\Markdown {
 				$footnote = preg_replace_callback('{F\x1Afn:(.*?)\x1A:}', 
 					array(&$this, '_appendFootnotes_callback'), $footnote);
 				
-				$attr = str_replace("%%", ++$num, $attr);
+				$attr = mb_str_replace("%%", ++$num, $attr);
 				$note_id = $this->encodeAttribute($note_id);
 
 				# Prepare backlink, multiple backlinks if multiple references
@@ -3031,7 +3031,7 @@ abstract class _MarkdownExtra_TmpImpl extends \Michelf\Markdown {
 				$attr .= " title=\"$title\"";
 			}
 			
-			$attr = str_replace("%%", $num, $attr);
+			$attr = mb_str_replace("%%", $num, $attr);
 			$node_id = $this->encodeAttribute($node_id);
 			
 			return

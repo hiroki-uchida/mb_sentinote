@@ -82,3 +82,7 @@ function rksnwp_core_deactivate() {
 	do_action( 'sentinote_core_deactivated' );
 }
 register_deactivation_hook( __FILE__, 'rksnwp_core_deactivate' );
+
+// マルチバイト対応
+include('lib/mb_str_replace/function.php');
+

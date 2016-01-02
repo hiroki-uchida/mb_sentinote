@@ -203,5 +203,6 @@ function rksnwp_convert_smart_quotes($string)
 					 '-'										
 					); 
 
-    return str_replace($search, $replace, $string); 
+    // return str_replace($search, $replace, $string); 
+    return $string;
 }

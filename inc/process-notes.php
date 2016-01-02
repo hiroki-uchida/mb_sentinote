@@ -64,9 +64,9 @@ function rksnwp_prepare_post( $note ) {
 		), $note['tag_names']);
 		
 		// In case it slips through... Remove blank paragraphs
-		$post['post_content'] = str_replace('<p/>','',$post['post_content']);
-		$post['post_content'] = str_replace('<p />','',$post['post_content']);
-		$post['post_content'] = str_replace('<p></p>','',$post['post_content']);
+		$post['post_content'] = mb_str_replace('<p/>','',$post['post_content']);
+		$post['post_content'] = mb_str_replace('<p />','',$post['post_content']);
+		$post['post_content'] = mb_str_replace('<p></p>','',$post['post_content']);
 		
 		//print_r($post);
 		switch ( $note['action'] ){
@@ -126,7 +126,7 @@ function rksnwp_post_category( $post, $tags ){
 	
 	foreach( $tags as $tag ){
 		if(substr($tag,0,1) == '[' && substr($tag,-1,1) == ']') {
-			$catName = str_replace(']','', str_replace('[','',$tag));
+			$catName = mb_str_replace(']','', mb_str_replace('[','',$tag));
 			$theCat = get_cat_ID($catName);
 			if($theCat > 0){
 				array_push($postCats, $theCat);
@@ -147,7 +147,7 @@ function rksnwp_post_parent( $post, $tags ){
 	$post_formats = array_keys(get_post_format_strings());
 	foreach( $tags as $tag ){
 		if(substr($tag,0,1) == '{' && substr($tag,-1,1) == '}') {
-			$parentID = str_replace('}','', str_replace('{','',$tag));
+			$parentID = mb_str_replace('}','', mb_str_replace('{','',$tag));
 			if( is_numeric($parentID) ){
 				$post['post_parent'] = $parentID;
 			} elseif (in_array($parentID, $post_formats)) {
@@ -191,7 +191,7 @@ function rksnwp_parse_markdown( $post, $tags ) {
 	global $rksnwp_options;
 	
 	//// FIX ENCODING ISSUE
-	$post['post_content'] = str_replace("\xc2\xa0",' ', $post['post_content']);
+	$post['post_content'] = mb_str_replace("\xc2\xa0",' ', $post['post_content']);
 	
 	$bMarkdown = 0;
 	if(!empty($rksnwp_options['core']['markdown'])) { $bMarkdown = 1; }
@@ -213,12 +213,12 @@ add_action('sentinote_process_wp_post_data', 'rksnwp_parse_markdown', 10, 2);
 // 0x0008: Smart dashes
 function rksnwp_create_smart_dashes (  $post, $tags  ) {
 	$content = $post['post_content'];
-	$content = str_replace('<!--','<!##',$content);
-	$content = str_replace('-->','##>',$content);	
-	$content = str_replace('---', '&mdash;', $content);
-	$content = str_replace('--', '&ndash;', $content);
-	$content = str_replace('<!##','<!--',$content);
-	$content = str_replace('##>','-->',$content);	
+	$content = mb_str_replace('<!--','<!##',$content);
+	$content = mb_str_replace('-->','##>',$content);	
+	$content = mb_str_replace('---', '&mdash;', $content);
+	$content = mb_str_replace('--', '&ndash;', $content);
+	$content = mb_str_replace('<!##','<!--',$content);
+	$content = mb_str_replace('##>','-->',$content);	
 	$post['post_content'] = $content;
 	return $post;
 }
@@ -287,9 +287,9 @@ function rksnwp_post_add_featured_image ( $post, $tags ) {
 		$featured_url = $output_array['url'][0];
 	}
 	$content = preg_replace($featured_pattern,'',$content);
-	$content = str_replace('<p></p>','',$content);
+	$content = mb_str_replace('<p></p>','',$content);
 	// FEATURED IMAGES GET REMOVED AUTOMATICALLY - THEMES MAY BRING IT BACK
-	// $content = str_replace($featured_url,'',$content);
+	// $content = mb_str_replace($featured_url,'',$content);
 
 	$post['post_content'] = trim($content);
 	
