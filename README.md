@@ -1,3 +1,18 @@
+EvernoteからWordPressに投稿できる「sentinote」の日本語対応版です。
+
+本家: [WordPress › Sentinote « WordPress Plugins](https://ja.wordpress.org/plugins/sentinote/)
+
+参考: [sentinorteプラグインでEvernoteからWordpressに投稿する | Tokyo O life](http://www.zubapita.jp/2015/03/20/sentinorte%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%A7evernote%E3%81%8B%E3%82%89wordpress%E3%81%AB%E6%8A%95%E7%A8%BF%E3%81%99%E3%82%8B-2/)
+
+## 動作確認
+
+- PHP 7.0.1
+- WordPress 4.4
+
+以下、本家の「readme.txt」です。
+
+---
+
 === Sentinote ===
 Contributors: rheinardkorf
 Tags: evernote, integration, autoblog
@@ -11,7 +26,7 @@ Sentinote converts your notes into WordPress posts or pages. Keep using Evernote
 == Description ==
 Sentinote provides a complete Evernote integration solution for WordPress. It allows you to quickly make changes to your website or blog by simply typing notes inside Evernote.
 
-### Note: Seeking contributor. 
+### Note: Seeking contributor.
 
 ### Features:  
 
@@ -30,9 +45,9 @@ Sentinote provides a complete Evernote integration solution for WordPress. It al
 
 * An Evernote account.  
 * A self-/hosted WordPress website (Not a WordPress.com website. They don’t support 3rd party plugins)  
-* Evernote’s tools require that your website runs PHP 5.3 or higher. Most hosting providers meet this requirement although some hosts do not enable this by default. A simple support ticket to your provider will do the trick. 
+* Evernote’s tools require that your website runs PHP 5.3 or higher. Most hosting providers meet this requirement although some hosts do not enable this by default. A simple support ticket to your provider will do the trick.
 
-### Documentation: 
+### Documentation:
 
 Sentinote documentation can be found at <http://sentinote.com/documentation/>  
 
@@ -67,9 +82,9 @@ Sentinote 1.1.3 -- PRIORITY UPDATE. Fixed major bug causing pages to disappear. 
 
 Sentinote 1.1.2 -- Fixed license activation bug.
 
-Sentinote 1.1.1 -- Minor bug fixes. 
+Sentinote 1.1.1 -- Minor bug fixes.
 
-Sentinote 1.1.0 -- Major Update. Name change to meet Evernote\'s developer guidelines. Completely re-developed plugin to make it extensible.  Added Markdown and Markdown Extra support. 
+Sentinote 1.1.0 -- Major Update. Name change to meet Evernote\'s developer guidelines. Completely re-developed plugin to make it extensible.  Added Markdown and Markdown Extra support.
 
 Everlicious 1.0.7 -- Minor bug fixes.
 
